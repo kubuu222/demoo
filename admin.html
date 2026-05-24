@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Scale — Panel Admina</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+    <header class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <img src="logo.jpg" alt="Golden Scale Logo" class="navbar-logo">
+            <span class="logo-text">Panel Admina</span>
+        </a>
+        <nav>
+            <a href="index.html">← Wróć na stronę</a>
+        </nav>
+    </header>
+
+    <main class="container admin-container">
+        <div class="admin-form-box">
+            <h2>Dodaj Nowego Węża</h2>
+            <form id="add-snake-form">
+                <input type="text" id="name"        placeholder="Nazwa / Odmiana (np. Amel Motley)" required>
+                <input type="text" id="sex"         placeholder="Płeć (np. Samiec 1.0)" required>
+                <input type="text" id="status"      placeholder="Status (np. Dostępny, Rezerwacja)" required>
+                <input type="text" id="price"       placeholder="Cena (np. 350 PLN)" required>
+
+                <!-- WGRYWANIE ZDJĘCIA -->
+                <div style="margin-bottom:14px;">
+                    <p style="font-size:0.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Zdjęcie węża</p>
+                    <label id="drop-zone" style="display:block;border:2px dashed var(--border);border-radius:10px;padding:28px 16px;text-align:center;background:var(--cream);cursor:pointer;transition:all 0.2s;" 
+                        ondragover="event.preventDefault();this.style.borderColor='var(--primary)'"
+                        ondragleave="this.style.borderColor='var(--border)'"
+                        ondrop="handleDrop(event)">
+                        <input type="file" id="image-file" accept="image/*" style="display:none;" onchange="handleFile(this.files[0])">
+                        <div id="drop-placeholder">
+                            <div style="font-size:2.2rem;margin-bottom:10px;">📁</div>
+                            <div style="font-size:0.88rem;color:var(--muted);font-weight:500;">Kliknij aby wybrać zdjęcie<br><span style="font-size:0.78rem;opacity:0.7;">lub przeciągnij z folderu</span></div>
+                        </div>
+                        <img id="image-thumb" src="" alt="" style="display:none;max-height:160px;max-width:100%;border-radius:8px;object-fit:cover;">
+                    </label>
+                </div>
+
+                <textarea id="description" placeholder="Opis węża..." rows="4" required></textarea>
+                <button type="submit" class="btn-primary">Dodaj do oferty</button>
+            </form>
+        </div>
+
+        <div class="admin-list-box">
+            <h2>Aktualna Oferta</h2>
+            <div id="admin-snake-list" class="admin-list"></div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        let currentImageBase64 = '';
+
+        // Klik na strefę = otwórz przeglądarkę plików
+        document.getElementById('drop-zone').addEventListener('click', function() {
+            document.getElementById('image-file').click();
+        });
+
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentImageBase64 = e.target.result;
+                showThumb(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            document.getElementById('drop-zone').style.borderColor = 'var(--border)';
+            const file = e.dataTransfer.files[0];
+            handleFile(file);
+        }
+
+        function showThumb(src) {
+            document.getElementById('drop-placeholder').style.display = 'none';
+            const thumb = document.getElementById('image-thumb');
+            thumb.src = src;
+            thumb.style.display = 'block';
+            document.getElementById('drop-zone').style.borderColor = 'var(--primary)';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAdminSnakes);
+
+        document.getElementById('add-snake-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!currentImageBase64) {
+                alert('Dodaj zdjęcie węża!');
+                return;
+            }
+            addSnake(currentImageBase64);
+            // Reset zdjęcia po dodaniu
+            currentImageBase64 = '';
+            document.getElementById('drop-placeholder').style.display = 'block';
+            document.getElementById('image-thumb').style.display = 'none';
+            document.getElementById('image-thumb').src = '';
+            document.getElementById('drop-zone').style.borderColor = 'var(--border)';
+        });
+    </script>
+</body>
+</html>

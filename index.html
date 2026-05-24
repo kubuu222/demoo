@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Scale | Hodowla Węży Zbożowych</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <img src="logo.jpg" alt="Golden Scale Logo" class="navbar-logo">
+            <span class="logo-text">Golden Scale</span>
+        </a>
+        <nav>
+            <a href="index.html">Oferta</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="logo.jpg" alt="Golden Scale" class="hero-logo">
+            <h1>Golden Scale</h1>
+            <p>Ekskluzywna hodowla węży zbożowych. Pasja, genetyka i najwyższa jakość.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Dostępne Węże</h2>
+        <div id="snake-grid" class="grid"></div>
+    </main>
+
+    <!-- Modal Produktowy -->
+    <div id="snake-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img id="modal-img" src="" alt="Wąż">
+                </div>
+                <div class="modal-info">
+                    <h2 id="modal-name"></h2>
+                    <p class="card-status" id="modal-status"></p>
+                    <div class="specs">
+                        <p><strong>Płeć:</strong> <span id="modal-sex"></span></p>
+                        <p><strong>Cena:</strong> <span id="modal-price"></span></p>
+                    </div>
+                    <div class="description">
+                        <h3>Opis</h3>
+                        <p id="modal-desc"></p>
+                    </div>
+                    <button class="btn-primary" onclick="document.location='#kontakt'">Zapytaj o węża</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="kontakt">
+        <div class="container">
+            <img src="logo.jpg" alt="Golden Scale" class="footer-logo">
+            <h3>Kontakt</h3>
+            <p>Zainteresowany? Skontaktuj się z nami!</p>
+            <br>
+            <p style="font-size:1.15rem; font-weight:700; color:#fff; margin-bottom:20px; letter-spacing:0.03em;">
+                📞 <a href="tel:+48792659606" style="color:#fff; text-decoration:none;">792 659 606</a>
+            </p>
+            <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+                <a href="https://www.facebook.com/GoldenScaleBreeder/" target="_blank" class="btn-secondary" style="display:flex; align-items:center; gap:8px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    Facebook
+                </a>
+                <a href="https://www.olx.pl/oferty/uzytkownik/Qug9/" target="_blank" class="btn-secondary" style="display:flex; align-items:center; gap:8px; background:#3b82f6;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-9 8H7v-5h4v5zm6 0h-4v-5h4v5z"/></svg>
+                    OLX
+                </a>
+            </div>
+            <p class="footer-note">Golden Scale © 2026. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
